@@ -34,6 +34,8 @@ public class EyeBallTest {
 		
 		collection.insertOne(doc);
 		
+		System.out.println("doc --> " + doc.toJson());
+		
 		//Closing db connections for shutdown hook
 		MongoDBConnector.INSTANCE.closeAsync();
 		MongoDBConnector.INSTANCE.closeSync();

@@ -53,7 +53,19 @@ public final class MongoDBConfigLoader {
 		return mongoDBProperties.getProperty("mongodb.username");
 	}
 	
-	public static String getMongoDBPassword() {//TODO change it to byte array. Also store encryoted password!
-		return mongoDBProperties.getProperty("mongodb.password");
+	public static String getMongoDBName1() {
+		return mongoDBProperties.getProperty("mongodb.dbName1");
+	}
+	
+	public static String getMongoDBName2() {
+		return mongoDBProperties.getProperty("mongodb.dbName2");
+	}
+	
+	public static char[] getMongoDBPassword() {//TODO change it to byte array. Also store encryoted password!
+		try{
+			return mongoDBProperties.getProperty("mongodb.password").toCharArray();
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 }
