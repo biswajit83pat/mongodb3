@@ -104,6 +104,14 @@ public enum MongoDBConnector {
 	public MongoDatabase getSyncPreviousMonthDatabase() {
 		return mongoSyncClient.getDatabase(getPreviousMonthYearDBString());
 	}
+	
+	public com.mongodb.async.client.MongoDatabase getAsyncDatabase(String dbName) {
+		return mongoAsyncClient.getDatabase(dbName);
+	}
+
+	public MongoDatabase getSyncDatabase(String dbName) {
+		return mongoSyncClient.getDatabase(dbName);
+	}
 
 	private String getCurrentMonthYearDBString() {
 		Calendar calendar = getCurrentCalendar();
