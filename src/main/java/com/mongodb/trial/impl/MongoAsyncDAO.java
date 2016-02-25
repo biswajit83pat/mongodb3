@@ -8,8 +8,10 @@ import org.bson.Document;
 import com.mongodb.async.client.MongoCollection;
 import com.mongodb.trial.IMongoAsyncDAO;
 import com.mongodb.trial.MongoDBConnector;
+import com.mongodb.trial.model.Domain;
+import com.mongodb.trial.util.OptionalConsumer;
 
-public class MongoAsyncDAO<T> implements IMongoAsyncDAO{
+public class MongoAsyncDAO<T extends Domain> implements IMongoAsyncDAO{
 
 	//private MongoCollection collection = MongoDBConnector.INSTANCE.getAsyncCurrentMonthDatabase().getCollection();
 
@@ -23,9 +25,11 @@ public class MongoAsyncDAO<T> implements IMongoAsyncDAO{
 	
 	public void insert(Document document) {
 		collection.insertOne(document, (result, t)-> {
-			Optional<Throwable> throwable = Optional.ofNullable(t);
+			//OptionalConsumer<Throwable> error = OptionalConsumer.of(Optional.ofNullable(t)).ifPresent(s ->System.out.println("isPresent "+s)).ifNotPresent(() -> System.out.println("is not present"));
+			OptionalConsumer.of(Optional.ofNullable(t)).ifPresent(s ->System.out.println("Insertion failed, cause "+s)).ifNotPresent(() -> System.out.println("Insertion Successful!"));
+			//throwable.ifNotPresent()
 			//throwable.ifPresent((e) -> System.out.println("error occurred while insertion, cause --> " + e.getMessage()));
-			System.out.println(throwable.map(e -> "Error occurred while inserting ->" + e.getMessage()).orElse("Insertion successsful!"));
+			//System.out.println(throwable.map(e -> "Error occurred while inserting ->" + e.getMessage()).orElse("Insertion successsful!"));
 		});
 	}
 
