@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bson.Document;
 
-public interface IMongoSyncDAO extends IMongoDAO {
-	public void insertInBulk(List<Document> document);
+import com.mongodb.trial.model.Domain;
+
+public interface IMongoSyncDAO<T extends Domain> extends IMongoDAO {
+	public void insertInBulk(List<T> document);
 }

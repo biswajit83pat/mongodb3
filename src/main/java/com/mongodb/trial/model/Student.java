@@ -23,7 +23,11 @@ public class Student implements Serializable, Domain{
 	private String schoolName;
 	private String standard;
 	private String section;
-
+	
+	private Student() {
+		//for internal use
+	}
+	
 	private Student(Builder builder) {
 		this._id = builder.builder_id;
 		this.rollNumber = builder.builderRollNumber;
@@ -117,7 +121,7 @@ public class Student implements Serializable, Domain{
 			synchronized(this) {
 				if(document == null) {
 					try {
-						document = PrivateAttributesAccessor.readAllPrivateMethods(this);
+						document = PrivateAttributesAccessor.readAndSetAllPrivateFields(this);
 					} catch (IllegalArgumentException | IllegalAccessException e) {
 						e.printStackTrace();
 						//TODO do logging
@@ -126,6 +130,18 @@ public class Student implements Serializable, Domain{
 			}
 		}
 		return document;
+	}
+
+	@Override
+	public Student fromJson(Document document) {
+		Student student = new Student();
+		try {
+			student = (Student) PrivateAttributesAccessor.populateDomainObjectFromMap(student, PrivateAttributesAccessor.getMapFromDocument(document, student));
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+			//TODO do logging
+		}
+		return student;
 	}
 	
 }

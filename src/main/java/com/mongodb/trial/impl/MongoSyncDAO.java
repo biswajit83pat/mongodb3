@@ -5,22 +5,24 @@ import java.util.List;
 import org.bson.Document;
 
 import com.mongodb.trial.IMongoSyncDAO;
+import com.mongodb.trial.model.Domain;
 
-public class MongoSyncDAO implements IMongoSyncDAO{
+public class MongoSyncDAO<T extends Domain> implements IMongoSyncDAO {
 
 	public void insert(Document document) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void readFirst(Document document) {
+	public T readFirst(Document document) {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 
-	public void readMany(Document document) {
+	public List<T> readMany(Document document) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	public void delete(Document document) {
@@ -43,7 +45,8 @@ public class MongoSyncDAO implements IMongoSyncDAO{
 		return 0;
 	}
 
-	public void insertInBulk(List<Document> document) {
+	@Override
+	public void insertInBulk(List document) {
 		// TODO Auto-generated method stub
 		
 	}

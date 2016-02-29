@@ -18,6 +18,6 @@ public class PrivateMethodAccessTest {
 				sex("Male").
 				standard("II").build();
 		
-		PrivateAttributesAccessor.readAllPrivateMethods(st);
+		PrivateAttributesAccessor.readAndSetAllPrivateFields(st);
 	}
 }

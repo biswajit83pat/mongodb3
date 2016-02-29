@@ -1,5 +1,8 @@
 package com.mongodb.trial.model;
 
-public interface Domain {
+import org.bson.Document;
 
+
+public interface Domain {
+	public Domain fromJson(Document document);
 }
