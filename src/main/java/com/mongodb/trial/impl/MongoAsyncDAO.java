@@ -80,11 +80,13 @@ public class MongoAsyncDAO<T extends Domain> extends MongoCollectionConfigBuilde
 		CompletableFuture<T> result = new CompletableFuture<>();
 		obj2 = null;
 		collection.find().first((doc , t) -> {
+			System.out.println("Inside find() async method..");
 			OptionalConsumer.of(Optional.ofNullable(t)).
 			ifPresent(s -> System.out.println("Exception occurred in readFirst " + s.getMessage())).
-			ifNotPresent(() -> {obj2 = (T) obj2.fromJson(doc); result.complete(obj2);});
+			ifNotPresent(() -> {obj2 = (T) obj2.fromJson(doc); result.complete(obj2);System.out.println("After..");});
 		});
 		try {
+			System.out.println("OLD");
 			return result.get();
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();

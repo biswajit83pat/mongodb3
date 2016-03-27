@@ -48,6 +48,7 @@ public class TestCRUDSync {
 		//mongoDAO.insert(student.document());
 		Document doc = new Document();
 		doc.append("_id", "3");
+		System.out.println("**");
 		System.out.println(mongoDAO.readFirst(doc));
 	}
 }
